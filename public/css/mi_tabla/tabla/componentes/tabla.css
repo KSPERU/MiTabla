@@ -1,0 +1,11 @@
+.tabla th,
+.tabla td {
+  font-family: "The Girl Next Door", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.tabla th {
+  color: #025f0e;
+}

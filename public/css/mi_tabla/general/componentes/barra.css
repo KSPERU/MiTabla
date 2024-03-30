@@ -1,0 +1,10 @@
+.barra {
+    background-color: #e3ffbe;
+}
+
+.barra .entidad {
+    font-family: "The Girl Next Door", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 36px;
+}

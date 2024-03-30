@@ -1,0 +1,74 @@
+<div {{ attributes }} data-poll="actualizarDatos">
+    <div class="mx-3 mt-3 border border-1 border-secondary-subtle rounded-4">
+        <table class="table tabla rounded-bottom rounded-top mt-3">
+            {% if listado is not empty %}
+                <thead>
+                    <tr>
+                        {% if true == ajustes.columnas.visible.todo %}
+                            {% for encabezado, valor in listado[0] %}
+                                <th scope="col" class="text-center col">{{ encabezado|capitalize }}</th>
+                            {% endfor %}
+                        {% else %}
+                            {% for encabezado in ajustes.columnas.visible.seleccionadas %}
+                                {% if encabezado is iterable %}
+                                    <th scope="col" class="text-center col-{{ encabezado.largo }}">{{ encabezado.nombre|capitalize }}</th>
+                                {% else %}
+                                    <th scope="col" class="text-center col">{{ encabezado|capitalize }}</th>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if true == ajustes.columnas.visible.todo %}
+                        {% if 'ascendente' == ajustes.ordenamiento.modo  %}
+                            {% for objeto in listado|slice(ajustes.rango.todo ? 0 : (ajustes.rango.especificaciones.inicio - 1), ajustes.rango.todo ? listado|length : (ajustes.rango.especificaciones.fin) )|sort((a, b) => attribute(a, ajustes.ordenamiento.columna) <=> attribute(b, ajustes.ordenamiento.columna)) %}
+                                <tr>
+                                    {% for atributo in objeto %}
+                                        <td class="text-center col">{{ atributo|capitalize }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for objeto in listado|slice(ajustes.rango.todo ? 0 : (ajustes.rango.especificaciones.inicio - 1), ajustes.rango.todo ? listado|length : (ajustes.rango.especificaciones.fin) )|sort((a, b) => attribute(a, ajustes.ordenamiento.columna) <=> attribute(b, ajustes.ordenamiento.columna))|reverse %}
+                                <tr>
+                                    {% for atributo in objeto %}
+                                        <td class="text-center col">{{ atributo|capitalize }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% else %}
+                        {% if 'ascendente' == ajustes.ordenamiento.modo  %}
+                            {% for objeto in listado|slice(ajustes.rango.todo ? 0 : (ajustes.rango.especificaciones.inicio - 1), ajustes.rango.todo ? listado|length : (ajustes.rango.especificaciones.fin) )|sort((a, b) => attribute(a, ajustes.ordenamiento.columna) <=> attribute(b, ajustes.ordenamiento.columna)) %}
+                                <tr>
+                                    {% for encabezado in ajustes.columnas.visible.seleccionadas %}
+                                            {% if encabezado is iterable %}
+                                                <td class="text-center col-{{ encabezado.largo }}">{{ attribute(objeto, encabezado.valor)|capitalize }}</td>
+                                            {% else %}
+                                                <td class="text-center col">{{ attribute(objeto, encabezado)|capitalize }}</td>
+                                            {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            {% for objeto in this.listado|slice(ajustes.rango.todo ? 0 : (ajustes.rango.especificaciones.inicio - 1), ajustes.rango.todo ? this.listado|length : (ajustes.rango.especificaciones.fin) )|sort((a, b) => attribute(a, ajustes.ordenamiento.columna) <=> attribute(b, ajustes.ordenamiento.columna))|reverse %}
+                                <tr>
+                                    {% for encabezado in ajustes.columnas.visible.seleccionadas %}
+                                            {% if encabezado is iterable %}
+                                                <td class="text-center col-{{ encabezado.largo }}">{{ attribute(objeto, encabezado.valor)|capitalize }}</td>
+                                            {% else %}
+                                                <td class="text-center col">{{ attribute(objeto, encabezado)|capitalize }}</td>
+                                            {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </tbody>
+            {% else %}
+                {# No mostrar nada #}
+            {% endif %}
+        </table>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<nav class="navbar border border-5 border-white rounded-4 barra mx-2">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ contenido.logo.redireccion.tipo == 'local' ? path(contenido.logo.redireccion.valor) : contenido.logo.redireccion.valor }}">
+            <img src="{{ contenido.logo.tipo == 'local' ? asset(contenido.logo.ubicacion) : contenido.logo.ubicacion }}" alt="Logo" width="50" height="50" class="d-inline-block align-top">
+        </a>
+        <span class="navbar-text ms-auto entidad">{{ contenido.variable.nombre }}</span>
+    </div>
+</nav>

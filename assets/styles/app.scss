@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&display=swap');
+
+:root {
+    --color: red;
+}
+
+.test-color {
+    color: var(--color);
+    font-family: "The Girl Next Door", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
